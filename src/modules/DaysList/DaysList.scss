@@ -1,0 +1,62 @@
+.daysList{
+    font-family: Arial, Helvetica, sans-serif;
+    display: flex;
+    flex-direction: column;
+
+    &__row{
+        display: flex;
+        gap: 10px;
+        flex-wrap: wrap;
+    }
+
+    &-select{
+        max-width: 200px;
+        border: 2px solid gray;
+        padding: 10px 50px;
+        border-radius: 10px;
+        margin-bottom: 50px;
+    }
+
+    &-day{
+        cursor: pointer;
+        width: 200px;
+        height: 200px;
+        border-radius: 10px;
+        box-shadow: 2px 2px 5px gray;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        justify-content: flex-start;
+        padding: 20px;
+    }
+
+    &-day:hover{
+        scale: 1.03;
+        transition: 0.3s;
+        box-shadow: 2px 2px 5px rgba($color: #38c94d, $alpha: 0.5);
+    }
+
+    &-day:not(:hover){
+        scale: 1;
+        transition: 0.3s;
+        box-shadow: 2px 2px 5px gray;
+    }
+}
+
+.day{
+
+    &-number{
+        font-size: 54px;
+        line-height: 54px;
+    }
+
+    &__modal{
+        z-index: 1000;
+        position: absolute;
+        top: 30%;
+        left: 40%;
+        height: 400px;
+        width: 200px;
+        background-color: red;
+    }
+}
