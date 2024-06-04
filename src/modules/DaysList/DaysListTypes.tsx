@@ -10,3 +10,11 @@ export type ToDoType = {
     name: string
     status: string
 }
+
+export type MonthsType = {
+    [key: string]: DayType[];
+};
+
+export type TodosType = {
+    [key: string]: ToDoType[];
+};

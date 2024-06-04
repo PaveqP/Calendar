@@ -8,7 +8,7 @@ interface IMonthSelector {
 const MonthSelector:FC<IMonthSelector> = ({selectedMonth, setSelectedMonth}) => {
   return (
     <section className='selector'>
-      <select value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)} className='selector-select'>
+        <select value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)} className='selector-select'>
                 <option value="01">Январь</option>
                 <option value="02">Февраль</option>
                 <option value="03">Март</option>
@@ -22,6 +22,24 @@ const MonthSelector:FC<IMonthSelector> = ({selectedMonth, setSelectedMonth}) => 
                 <option value="11">Ноябрь</option>
                 <option value="12">Декабрь</option>
         </select>
+        <div className="selector__history">
+            <div className="history__holiday">
+                <div className="history-example holiday-example">
+
+                </div>
+                <p className="history-description">
+                    - Выходные/Праздничные дни
+                </p>
+            </div>
+            <div className="history__workday">
+                <div className="history-example work-example">
+                    
+                </div>
+                <p className="history-description">
+                    - Рабочие дни
+                </p>
+            </div>
+        </div>
     </section>
   )
 }

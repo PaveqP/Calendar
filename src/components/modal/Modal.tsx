@@ -1,14 +1,14 @@
 import React, {FC, useState} from 'react'
 import { Close, Delete, Edit } from '../../ui'
-import { DayType, ToDoType } from '../../modules/DaysList/DaysListTypes'
+import { DayType, ToDoType, TodosType } from '../../modules/DaysList/DaysListTypes'
 import './Modal.scss'
 
 interface IModal{
-    day: DayType
-    todos: any
-    setTodos: (todos: any) => void
-    modalId: string | null
-    setModalId: (modalId: string | null) => void
+    day: DayType;
+    todos: TodosType;
+    setTodos: React.Dispatch<React.SetStateAction<TodosType>>;
+    modalId: string | null;
+    setModalId: (modalId: string | null) => void;
 }
 const Modal:FC<IModal> = ({day, todos, setTodos, modalId, setModalId}) => {
 
@@ -16,8 +16,8 @@ const Modal:FC<IModal> = ({day, todos, setTodos, modalId, setModalId}) => {
     const [newValue, setNewValue] = useState<string>('')
     const [newTask, setNewTask] = useState<string>('')
 
-    const handleSetTodos = (key: any, value: any) => {
-        setTodos((todos: any) => {
+    const handleSetTodos = (key: string, value: ToDoType) => {
+        setTodos((todos: TodosType) => {
             if (todos[key]) {
                 return { ...todos, [key]: [...todos[key], value] };
             } else {
@@ -25,46 +25,46 @@ const Modal:FC<IModal> = ({day, todos, setTodos, modalId, setModalId}) => {
             }
         });
 
-        setNewTask('')
+        setNewTask('');
     };
-    const changeTodoValue = (key: any, id: number, newValue: string) => {
-        const newElements = todos[key].map((todo: any) => {
+    const changeTodoValue = (key: string, id: number, newValue: string) => {
+        const newElements = todos[key].map((todo: ToDoType) => {
             if (todo.id === id) {
                 return {
                     ...todo,
-                    name: newValue
+                    name: newValue,
                 };
             }
             return todo;
         });
 
-        setTodos((todos: any) => ({ ...todos, [key]: newElements }));
+        setTodos((todos: TodosType) => ({ ...todos, [key]: newElements }));
         setActiveEdit((prevState) => ({ ...prevState, [`${key}-${id}`]: false }));
-    }
+    };
 
-    const handleDeleteTodos = (key: any, id: number) => {
-        const newElements = todos[key].filter((todo: any) => todo.id !== id)
-        setTodos((todos: any) => ({ ...todos, [key]: newElements }));
-    }
+    const handleDeleteTodos = (key: string, id: number) => {
+        const newElements = todos[key].filter((todo: ToDoType) => todo.id !== id);
+        setTodos((todos: TodosType) => ({ ...todos, [key]: newElements }));
+    };
 
-    const handleCompleteTodo = (key: any, id: number) => {
-        const newElements = todos[key].map((todo: any) => {
+    const handleCompleteTodo = (key: string, id: number) => {
+        const newElements = todos[key].map((todo: ToDoType) => {
             if (todo.id === id) {
                 return {
                     ...todo,
-                    status: todo.status === 'new' ? 'completed' : 'new'
+                    status: todo.status === 'new' ? 'completed' : 'new',
                 };
             }
             return todo;
         });
 
-        setTodos((todos: any) => ({ ...todos, [key]: newElements }));
+        setTodos((todos: TodosType) => ({ ...todos, [key]: newElements }));
     };
 
-    const handleEditClick = (key: any, id: number, currentName: string) => {
+    const handleEditClick = (key: string, id: number, currentName: string) => {
         setNewValue(currentName);
         setActiveEdit((prevState) => ({ ...prevState, [`${key}-${id}`]: true }));
-    }
+    };
 
   return (
     <div className="modal">
@@ -91,7 +91,13 @@ const Modal:FC<IModal> = ({day, todos, setTodos, modalId, setModalId}) => {
                 {todos[`${day.day}.${day.month}.${day.year}`] && todos[`${day.day}.${day.month}.${day.year}`].map((todo: ToDoType) => (
                     <div className={todo.status === 'new' ? 'tasks__task' : 'tasks__completed'} key={todo.id}>
                         <div className="task__control">
-                            <input type="checkbox" name="task" id="" checked={todo.status === 'completed'} onChange={() => handleCompleteTodo(`${day.day}.${day.month}.${day.year}`, todo.id)} />
+                            <input 
+                                type="checkbox" 
+                                name="task" 
+                                id="" 
+                                checked={todo.status === 'completed'} 
+                                onChange={() => handleCompleteTodo(`${day.day}.${day.month}.${day.year}`, todo.id)} 
+                            />
                             {activeEdit[`${day.day}.${day.month}.${day.year}-${todo.id}`] ?
                                 <input
                                     type="text"
@@ -105,8 +111,14 @@ const Modal:FC<IModal> = ({day, todos, setTodos, modalId, setModalId}) => {
                             }
                         </div>
                         <div className="task__actions">
-                            <button className='task-edit' onClick={() => handleEditClick(`${day.day}.${day.month}.${day.year}`, todo.id, todo.name)}><Edit /></button>
-                            <button className='task-delete'
+                            <button 
+                                className='task-edit' 
+                                onClick={() => handleEditClick(`${day.day}.${day.month}.${day.year}`, todo.id, todo.name)}
+                            >
+                                <Edit />
+                            </button>
+                            <button 
+                                className='task-delete'
                                 onClick={() => handleDeleteTodos(`${day.day}.${day.month}.${day.year}`, todo.id)}
                             >
                                 <Delete />
