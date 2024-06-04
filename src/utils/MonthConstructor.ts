@@ -1,3 +1,4 @@
+import axios from "axios";
 import { DayConstructor } from "./DayConstructor"
 
 type MonthType = {
@@ -8,12 +9,13 @@ type ResultType = {
     [key: string]: any;
 }
 
-export class MonthConstructor{
+export class MonthConstructor {
 
     months: MonthType = {}
     result: ResultType = {}
+    loading: boolean = false
 
-    constructor(){
+    constructor() {
         this.months = {
             '01': 31,
             '02': 29,
@@ -31,21 +33,47 @@ export class MonthConstructor{
         this.result = {}
     }
 
-    setResult(){
+    async setResult() {
+        this.loading = true;
         const date = new Date()
         const year = date.getFullYear()
 
-        for (const key in this.months) {
-            this.result[key] = []
+        const dataString = await this.getDataType(String(year));
+        
+        let dayIndex = 0;
 
-            for(let i = 1; i <= this.months[key]; i++){
-                const day = new DayConstructor(String(i), String(key), String(year), [])
-                this.result[key].push(day)
+        const sortedMonths = Object.keys(this.months).sort((a, b) => parseInt(a) - parseInt(b));
+
+        for (const key of sortedMonths) {
+            this.result[key] = [];
+
+            for (let i = 1; i <= this.months[key]; i++) {
+                const data = dataString[dayIndex];
+
+                if (data !== undefined) {
+                    const day = new DayConstructor(String(i), String(key), String(year), data);
+                    this.result[key].push(day);
+                }
+
+                dayIndex++;
             }
         }
+
+        this.loading = false;
     }
 
-    getResult(){
-        return this.result
+    getDataType = async (year: string) => {
+        // const response = await axios.get(`https://isdayoff.ru/api/getdata?year=${year}`);
+        // response && console.log(response)
+        // return response.data;
+        return '111111110000110000011000001100000110000011000001100001110000011000011100000110000011000001100000110000011000001100000011110011000111100000110000011000001100000110010011000001100000110000011000001100000110000011000001100000110000011000001100000110000011000001100000110000011000001100000110000011000001100000011000011000001100000110000011000001100000110000011000000111'
+    }
+
+    getResult() {
+        return this.result;
+    }
+
+    isLoading() {
+        return this.loading;
     }
 }

@@ -1,12 +1,14 @@
 import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { MonthConstructor } from '../../utils/MonthConstructor'
 import './DaysList.scss'
+import axios from 'axios'
 
 function DaysList() {
 
     const [months, setMonths] = useState<any>()
-    const [selectedMonth, setSelectedMonth] = useState('05')
+    const [selectedMonth, setSelectedMonth] = useState('01')
     const [modalId, setModalId] = useState<string | null>(null)
+    const [loading, setLoading] = useState<boolean>(true);
 
     const [newTask, setNewTask] = useState<string>('')
     const [todos, setTodos] = useState<any>(() => {
@@ -14,11 +16,18 @@ function DaysList() {
         return savedTasks ? JSON.parse(savedTasks) : {};
     });
 
-    useLayoutEffect(() => {
-        const result = new MonthConstructor()
-        result.setResult()
-        setMonths(result.getResult())
-    }, [])
+    useEffect(() => {
+        const fetchData = async () => {
+            const result = new MonthConstructor();
+            await result.setResult();
+            setMonths(result.getResult());
+            setLoading(result.isLoading());
+        };
+
+        fetchData();
+    }, []);
+
+    console.log(months)
 
     const handleSetTodos = (key: any, value: any) => {
         setTodos((todos: any) => {
@@ -61,6 +70,10 @@ function DaysList() {
         localStorage.setItem('currentTasks', JSON.stringify(todos))
     }, [todos])
 
+    if (loading) {
+        return <div>Loading...</div>; // или любой другой индикатор загрузки
+    }
+
   return (
     <div className='daysList'>
         <select value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)} className='daysList-select'>
@@ -69,11 +82,18 @@ function DaysList() {
                 <option value="03">Март</option>
                 <option value="04">Апрель</option>
                 <option value="05">Май</option>
+                <option value="06">Июнь</option>
+                <option value="07">Июль</option>
+                <option value="08">Август</option>
+                <option value="09">Сентябрь</option>
+                <option value="10">Октябрь</option>
+                <option value="11">Ноябрь</option>
+                <option value="12">Декабрь</option>
         </select>
         <div className="daysList__row">
-            {months && months[String(selectedMonth)].map((day: any, dayIndex: number) => (
+            {months && months[String(selectedMonth)] && months[String(selectedMonth)].map((day: any, dayIndex: number) => (
                 <>
-                    <div className="daysList-day" key={dayIndex} onClick={() => setModalId(`${day.day}.${day.month}.${day.year}`)}>
+                    <div className={day.type === '0' ? 'daysList-day day' : 'daysList-holiday day'} key={dayIndex} onClick={() => setModalId(`${day.day}.${day.month}.${day.year}`)}>
                         <p className='day-number'>{day.day}</p>
                     </div>
                     {modalId === `${day.day}.${day.month}.${day.year}` &&

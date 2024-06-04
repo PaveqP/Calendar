@@ -9,37 +9,20 @@ export class DayConstructor {
     day: string
     month: string
     year: string
-    tasks: TaskType[] 
+    type: string
     
-    constructor(day: string, month: string, year: string, tasks: []){
+    constructor(day: string, month: string, year: string, type: string){
         this.day = day
         this.month = month
         this.year = year
-        this.tasks = tasks
+        this.type = type
     }
 
     getFullDate(){
         return `${String(this.day)}. ${String(this.month)}. ${String(this.year)}`
     }
 
-    getTasks(){
-        return this.tasks
-    }
-
-    addTask(task: TaskType){
-        this.tasks.push(task)
-    }
-
-    deleteTask(taskId: number){
-        this.tasks = this.tasks.filter((task) => task.id !== taskId)
-    }
-
-    changeTask(task: TaskType, taskId: number){
-        this.tasks = this.tasks.map((currentTask) => {
-            if (currentTask.id === taskId) {
-                return task;
-            }
-            return currentTask;
-        });
+    getType(){
+        return this.type
     }
 }
