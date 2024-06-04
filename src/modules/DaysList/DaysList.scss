@@ -26,7 +26,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        justify-content: flex-start;
+        justify-content: space-between;
         padding: 20px;
     }
 
@@ -40,7 +40,7 @@
         display: flex;
         flex-direction: column;
         align-items: flex-start;
-        justify-content: flex-start;
+        justify-content: space-between;
         padding: 20px;
     }
 }
@@ -52,15 +52,22 @@
         line-height: 54px;
     }
 
+    &__count{
+        display: flex;
+        align-items: center;
+        gap: 10px;
+
+    }
+
     &__modal{
         z-index: 1000;
-        position: absolute;
-        top: 30%;
-        left: 40%;
+        position: fixed;
+        top: 20%;
+        right: 33%;
         height: 400px;
-        width: fit-content;
+        width: 500px;
         background-color: white;
-        box-shadow: 2px 2px 10px gray;
+        box-shadow: 2px 2px 100px rgba($color: #323232, $alpha: 1.0);
         border-radius: 10px;
 
         display: flex;
@@ -89,11 +96,15 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+
+        button{
+            background-color: white;
+        }
     }
 
     &-date{
-        font-size: 18px;
-        line-height: 20px;
+        font-size: 24px;
+        line-height: 25px;
     }
 
     &-separator{
@@ -101,7 +112,7 @@
         width: 100%;
         background-color: gray;
         margin-top: 5px;
-        margin-bottom: 5px;
+        margin-bottom: 10px;
     }
 
     &__tasks{
@@ -112,15 +123,34 @@
 .tasks{
 
     &__actions{
-        max-width: 100%;
+        width: 100%;
         display: flex;
         align-items: center;
+        justify-content: space-between;
+        border: 1px solid gray;
+        border-radius: 6px;
+        padding: 5px;
+
+        input{
+            width: 100%;
+            padding-right: 20px;
+        }
 
         button{
             background-color: #38c94d;
             color: white;
             border-radius: 5px;
             padding: 2px 5px;
+        }
+
+        button:hover{
+            scale: 1.05;
+            transition: 0.3s;
+        }
+        
+        button:not(:hover){
+            scale: 1;
+            transition: 0.3s;
         }
     }
 
@@ -130,11 +160,18 @@
         flex-direction: column;
         gap: 10px;
 
-        max-height: 300px;
+        max-height: 270px;
         overflow-y: scroll;
     }
 
     &__task{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &__completed{
+        text-decoration: line-through;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -167,17 +204,41 @@
         color: white;
     }
 
-    &-edit{
-        background-color: #c9a038;
+    &-rename{
+        border: 1px solid #38c94d;
         border-radius: 5px;
         padding: 2px 5px;
-        color: white;
+    }
+
+    &-edit{
+        border-radius: 5px;
+        padding: 2px 5px;
+        background-color: white;
+    }
+
+    &-edit:hover{
+        scale: 1.05;
+        transition: 0.3s;
+    }
+    
+    &-edit:not(:hover){
+        scale: 1;
+        transition: 0.3s;
     }
 
     &-delete{
-        background-color: #c9383f;
         border-radius: 5px;
         padding: 2px 5px;
-        color: white;
+        background-color: white;
+    }
+
+    &-delete:hover{
+        scale: 1.05;
+        transition: 0.3s;
+    }
+    
+    &-delete:not(:hover){
+        scale: 1;
+        transition: 0.3s;
     }
 }
