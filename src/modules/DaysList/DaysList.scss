@@ -9,14 +9,6 @@
         flex-wrap: wrap;
     }
 
-    &-select{
-        max-width: 200px;
-        border: 2px solid gray;
-        padding: 10px 50px;
-        border-radius: 10px;
-        margin-bottom: 50px;
-    }
-
     &-day{
         cursor: pointer;
         width: 200px;
@@ -57,23 +49,6 @@
         align-items: center;
         gap: 10px;
 
-    }
-
-    &__modal{
-        z-index: 1000;
-        position: fixed;
-        top: 20%;
-        right: 33%;
-        height: 400px;
-        width: 500px;
-        background-color: white;
-        box-shadow: 2px 2px 100px rgba($color: #323232, $alpha: 1.0);
-        border-radius: 10px;
-
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start;
-        padding: 15px;
     }
 }
 
@@ -120,125 +95,3 @@
     }
 }
 
-.tasks{
-
-    &__actions{
-        width: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        border: 1px solid gray;
-        border-radius: 6px;
-        padding: 5px;
-
-        input{
-            width: 100%;
-            padding-right: 20px;
-        }
-
-        button{
-            background-color: #38c94d;
-            color: white;
-            border-radius: 5px;
-            padding: 2px 5px;
-        }
-
-        button:hover{
-            scale: 1.05;
-            transition: 0.3s;
-        }
-        
-        button:not(:hover){
-            scale: 1;
-            transition: 0.3s;
-        }
-    }
-
-    &__list{
-        margin-top: 10px;
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-
-        max-height: 270px;
-        overflow-y: scroll;
-    }
-
-    &__task{
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    &__completed{
-        text-decoration: line-through;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-}
-
-.task{
-
-    &-name{
-
-    }
-
-    &__control{
-        margin-right: 20px;
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    &__actions{
-        display: flex;
-        align-items: center;
-        gap: 5px;
-    }
-
-    &-status{
-        background-color: #38c94d;
-        border-radius: 5px;
-        padding: 2px 5px;
-        color: white;
-    }
-
-    &-rename{
-        border: 1px solid #38c94d;
-        border-radius: 5px;
-        padding: 2px 5px;
-    }
-
-    &-edit{
-        border-radius: 5px;
-        padding: 2px 5px;
-        background-color: white;
-    }
-
-    &-edit:hover{
-        scale: 1.05;
-        transition: 0.3s;
-    }
-    
-    &-edit:not(:hover){
-        scale: 1;
-        transition: 0.3s;
-    }
-
-    &-delete{
-        border-radius: 5px;
-        padding: 2px 5px;
-        background-color: white;
-    }
-
-    &-delete:hover{
-        scale: 1.05;
-        transition: 0.3s;
-    }
-    
-    &-delete:not(:hover){
-        scale: 1;
-        transition: 0.3s;
-    }
-}

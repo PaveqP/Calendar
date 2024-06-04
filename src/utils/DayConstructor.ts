@@ -1,9 +1,3 @@
-type TaskType = {
-    id: number
-    name: string
-    status: string
-}
-
 export class DayConstructor {
 
     day: string
