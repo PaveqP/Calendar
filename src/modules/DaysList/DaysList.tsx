@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useState } from 'react'
+import React, { useEffect, useLayoutEffect, useState } from 'react'
 import { MonthConstructor } from '../../utils/MonthConstructor'
 import './DaysList.scss'
 
@@ -9,7 +9,10 @@ function DaysList() {
     const [modalId, setModalId] = useState<string | null>(null)
 
     const [newTask, setNewTask] = useState<string>('')
-    const [todos, setTodos] = useState<any>({})
+    const [todos, setTodos] = useState<any>(() => {
+        const savedTasks = localStorage.getItem('currentTasks');
+        return savedTasks ? JSON.parse(savedTasks) : {};
+    });
 
     useLayoutEffect(() => {
         const result = new MonthConstructor()
@@ -31,14 +34,32 @@ function DaysList() {
 
     const handleDeleteTodos = (key: any, id: number) => {
 
-        console.log(id)
-
         const newElements = todos[key].filter((todo: any) => todo.id !== id)
 
         setTodos((todos: any) => {
             return { ...todos, [key]: newElements}
         })
     }
+
+    const handleCompleteTodo = (key: any, id: number) => {
+        const newElements = todos[key].map((todo: any) => {
+            if (todo.id === id) {
+                return {
+                    ...todo,
+                    status: todo.status === 'new' ? 'completed' : 'new'
+                };
+            }
+            return todo;
+        });
+    
+        setTodos((todos: any) => {
+            return { ...todos, [key]: newElements };
+        });
+    };
+
+    useEffect(() => {
+        localStorage.setItem('currentTasks', JSON.stringify(todos))
+    }, [todos])
 
   return (
     <div className='daysList'>
@@ -72,11 +93,14 @@ function DaysList() {
                                 <div className="tasks__list">
                                     {todos[`${day.day}.${day.month}.${day.year}`] && todos[`${day.day}.${day.month}.${day.year}`].map((todo: any) => (
                                         <div className="tasks__task">
-                                            <p className='task-name'>{todo.name}</p>
+                                            <div className="task__control">
+                                                <input type="checkbox" name="task" id="" onChange={() => handleCompleteTodo(`${day.day}.${day.month}.${day.year}`, todo.id)}/>
+                                                <p className='task-name'>{todo && todo.name}</p>
+                                            </div>
                                             <div className="task__actions">
                                                 <button className='task-edit'>edit</button>
                                                 <button className='task-delete' onClick={() => handleDeleteTodos(`${day.day}.${day.month}.${day.year}`, todo.id)}>del</button>
-                                                <p className='task-status'>{todo.status}</p>
+                                                <p className='task-status'>{todo && todo.status}</p>
                                             </div>
                                         </div>
                                     ))

@@ -116,7 +116,7 @@
         flex-direction: column;
         gap: 10px;
 
-        max-height: 250px;
+        max-height: 300px;
         overflow-y: scroll;
     }
 
@@ -131,6 +131,12 @@
 
     &-name{
 
+    }
+
+    &__control{
+        display: flex;
+        align-items: center;
+        gap: 10px;
     }
 
     &__actions{
