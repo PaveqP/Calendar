@@ -96,6 +96,56 @@
     }
 }
 
+@media(max-width: 900px){
+    .day{
+        width: 120px;
+        height: 120px;
+        padding: 10px;
+
+        &-number{
+            font-size: 42px;
+            line-height: 43px;
+        }
+    
+        &__count{
+            display: flex;
+            align-items: left;
+            gap: 5px;
+            font-size: 9px;
+        }
+    }
+
+    .holiday{
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media(max-width: 700px){
+    .day{
+        width: 90px;
+        height: 90px;
+        padding: 5px;
+
+        &-number{
+            font-size: 36px;
+            line-height: 37px;
+        }
+    
+        &__count{
+            display: flex;
+            align-items: left;
+            gap: 5px;
+            font-size: 7px;
+        }
+    }
+
+    .holiday{
+        width: 120px;
+        height: 120px;
+    }
+}
+
 .day:hover{
     scale: 1.03;
     transition: 0.3s;
