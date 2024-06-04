@@ -4,8 +4,10 @@ import './MonthSelector.scss'
 interface IMonthSelector {
     selectedMonth: string
     setSelectedMonth: (selectedMonth: string) => void
+    showByWeek: boolean
+    setShowByWeek: (showByWeek: boolean) => void
 }
-const MonthSelector:FC<IMonthSelector> = ({selectedMonth, setSelectedMonth}) => {
+const MonthSelector:FC<IMonthSelector> = ({selectedMonth, setSelectedMonth, showByWeek, setShowByWeek}) => {
   return (
     <section className='selector'>
         <select value={selectedMonth} onChange={(e) => setSelectedMonth(e.target.value)} className='selector-select'>
@@ -38,6 +40,10 @@ const MonthSelector:FC<IMonthSelector> = ({selectedMonth, setSelectedMonth}) => 
                 <p className="history-description">
                     - Рабочие дни
                 </p>
+            </div>
+            <div className="history__showWeeks">
+                <input type="checkbox" checked={showByWeek} onChange={() => setShowByWeek(!showByWeek)}/>
+                <p>Отображать по неделям</p>
             </div>
         </div>
     </section>

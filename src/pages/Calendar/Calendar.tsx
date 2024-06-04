@@ -5,10 +5,10 @@ import './Calendar.scss'
 function Calendar() {
 
   return (
-    <div className='calendar'>
+    <section className='calendar'>
         <Header/>
         <DaysList/>
-    </div>
+    </section>
   )
 }
 

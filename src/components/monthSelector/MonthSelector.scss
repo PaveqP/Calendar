@@ -48,6 +48,17 @@
     &-description{
 
     }
+
+    &__showWeeks{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+
+        input{
+            height: 25px;
+            width: 25px;
+        }
+    }
 }
 
 .work-example{

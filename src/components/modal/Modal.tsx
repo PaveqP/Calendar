@@ -67,7 +67,7 @@ const Modal:FC<IModal> = ({day, todos, setTodos, modalId, setModalId}) => {
     };
 
   return (
-    <div className="modal">
+    <section className="modal">
         <div className="modal__info">
             <p className='modal-date'>{day.day}.{day.month}.{day.year}</p>
             <button onClick={() => setModalId(null)}><Close /></button>
@@ -129,7 +129,7 @@ const Modal:FC<IModal> = ({day, todos, setTodos, modalId, setModalId}) => {
                 }
             </div>
         </div>
-    </div>
+    </section>
     )
 }
 
