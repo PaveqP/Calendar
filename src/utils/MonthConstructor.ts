@@ -39,7 +39,7 @@ export class MonthConstructor{
             this.result[key] = []
 
             for(let i = 1; i <= this.months[key]; i++){
-                const day = new DayConstructor(String(i), String(key), String(year))
+                const day = new DayConstructor(String(i), String(key), String(year), [])
                 this.result[key].push(day)
             }
         }

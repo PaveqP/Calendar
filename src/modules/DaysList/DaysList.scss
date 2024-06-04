@@ -56,7 +56,107 @@
         top: 30%;
         left: 40%;
         height: 400px;
-        width: 200px;
-        background-color: red;
+        width: fit-content;
+        background-color: white;
+        box-shadow: 2px 2px 10px gray;
+        border-radius: 10px;
+
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+}
+
+.modal{
+
+    &__info{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    &-date{
+        font-size: 18px;
+        line-height: 20px;
+    }
+
+    &-separator{
+        height: 1px;
+        width: 100%;
+        background-color: gray;
+        margin-top: 5px;
+        margin-bottom: 5px;
+    }
+
+    &__tasks{
+        width: 100%;
+    }
+}
+
+.tasks{
+
+    &__actions{
+        max-width: 100%;
+        display: flex;
+        align-items: center;
+
+        button{
+            background-color: #38c94d;
+            color: white;
+            border-radius: 5px;
+            padding: 2px 5px;
+        }
+    }
+
+    &__list{
+        margin-top: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        max-height: 250px;
+        overflow-y: scroll;
+    }
+
+    &__task{
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.task{
+
+    &-name{
+
+    }
+
+    &__actions{
+        display: flex;
+        align-items: center;
+        gap: 5px;
+    }
+
+    &-status{
+        background-color: #38c94d;
+        border-radius: 5px;
+        padding: 2px 5px;
+        color: white;
+    }
+
+    &-edit{
+        background-color: #c9a038;
+        border-radius: 5px;
+        padding: 2px 5px;
+        color: white;
+    }
+
+    &-delete{
+        background-color: #c9383f;
+        border-radius: 5px;
+        padding: 2px 5px;
+        color: white;
     }
 }
